@@ -46,7 +46,7 @@ yarn add --dev @babel/preset-typescript // babel 和 ts 依赖
 
 新建 `babel.config.js` 文件
 
-```javascript
+```js
 module.exports = {
   presets: [
     ['@babel/preset-env', {targets: {node: 'current'}}],
@@ -55,13 +55,35 @@ module.exports = {
 }
 ```
 
+##### 编写测试用例代码
+
+新建 `src/demo/index.ts` 和 `src/demo/__tests__/index.spec.ts` 文件
+
+```js
+// index.ts
+export function sum(a, b) {
+  return a + b
+}
+```
+
+```js
+// demo.test.ts
+import { sum } from '../index'
+
+it('这是测试用例输出的内容', () => {
+  expect(sum(1, 1)).toBe(2)
+})
+```
+
 ##### package.json 配置
 
 在 `package.json` 中新增启动命令
 
-```
+```json
 "scripts": {
   "test": "jest"
 }
 ```
+
+##### 运行测试命令 yarn test
 

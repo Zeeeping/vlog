@@ -13,3 +13,7 @@
 ## 构建 typescript 环境
 
 对应的文件夹是 `typescript-jest`，搭建 `typescript` 开发环境以及 `jest` 测试用例环境
+
+## 前端开发规范
+
+对应的文件夹是 `front-specification`，一套规范对于一个团队是很重要的

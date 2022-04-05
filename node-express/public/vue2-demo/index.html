@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Vue2</title>
+</head>
+<body>
+  <div id="app">
+    <p><label for="input-first-name">输入 first name</label><input type="text" id="input-first-name" /></p>
+    <p><label for="input-age">输入 年龄</label><input type="text" id="input-age" /></p>
+    <h1>first name：{{ name.first }}</h1>
+    <h1>年龄：{{ age }}</h1>
+  </div>
+  <script type="module">
+    import Vue from './src/vue.js'
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        name: {
+          first: 'Zep'
+        },
+        age: 18
+      }
+    })
+
+    let inputFirst = document.querySelector('#input-first-name')
+    inputFirst.oninput = events => {
+      vm.$data.name.first = events.target.value
+    }
+
+    let inputAge = document.querySelector('#input-age')
+    inputAge.oninput = events => {
+      vm.$data.age = events.target.value
+    }
+  </script>
+</body>
+</html>

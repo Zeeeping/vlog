@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实现最精简的响应式系统</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    import { reactive } from './src/reactive.js'
+    import Watcher from './src/watcher.js'
+
+    window.data = reactive({
+      msg: 'Hello World',
+      job: {
+        lv: 'P8'
+      }
+    })
+
+    new Watcher(() => {
+      document.getElementById('app').innerHTML = `msg is ${data.job.lv}`
+    })
+  </script>
+</body>
+</html>

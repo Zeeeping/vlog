@@ -7,6 +7,7 @@ export default class Dep {
   }
 
   depend() {
+    console.log('收集 Dep.target：', Dep.target)
     if (Dep.target) this.deps.add(Dep.target)
   }
 
@@ -19,7 +20,12 @@ Dep.target = null
 
 // 将当前的 watcher 推入栈中，更新 Dep.target 为传入新的 _target
 export function pushStack(_target) {
-  if (Dep.target) targetStack.push(Dep.target)
+  if (Dep.target) {
+    console.log('已经有一个 Dep.target：', Dep.target)
+    console.log('将 Dep.target 推到 targetStack 栈中')
+    targetStack.push(Dep.target)
+  }
+  console.log('将 _target', _target, '赋值给 Dep.target')
   Dep.target = _target
 }
 

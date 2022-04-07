@@ -24,12 +24,13 @@ function defineReactive(obj, key) {
     enumerable: true,
     configurable: true,
     get: () => {
-      // 在收集依赖之前 watcher 已经
+      console.log('此时触发普通属性的 get hook 调用 dep.depend')
       dep.depend()
       return val
     },
     set: newVal => {
       if (newVal != val) {
+        console.log('此时触发普通属性的 set hook 调用 dep.notify')
         val = newVal
         dep.notify()
       }

@@ -10,17 +10,17 @@
   <div id="app"></div>
   <script type="module">
     import { reactive } from './src/reactive.js'
+    import { computed } from './src/computed.js'
     import Watcher from './src/watcher.js'
 
     window.data = reactive({
-      msg: 'Hello World',
-      job: {
-        lv: 'P8'
-      }
+      conut: 1
     })
 
+    const obj = computed(() => data.conut + 1)
+
     new Watcher(() => {
-      document.getElementById('app').innerHTML = `msg is ${data.job.lv}`
+      document.getElementById('app').innerHTML = `msg is ${obj.value}`
     })
   </script>
 </body>

@@ -17,3 +17,7 @@
 ## 前端开发规范
 
 对应的文件夹是 `front-specification`，一套规范对于一个团队是很重要的
+
+## react spa
+
+对应的文件夹是 `vite-react-ts`，使用的技术栈是 `vite + react + ts`

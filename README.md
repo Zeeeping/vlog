@@ -21,3 +21,7 @@
 ## react spa
 
 对应的文件夹是 `vite-react-ts`，使用的技术栈是 `vite + react + ts`
+
+## 部署 docker 应用
+
+对应的文件夹是 `docker-compose`，用于多环境部署

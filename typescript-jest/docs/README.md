@@ -66,6 +66,80 @@ type FunctionProps = {
 };
 ```
 
+#### 来实现一个类型过滤
+
+```ts
+// 首先熟悉一下, keyof 和 extends 以及动态赋值的用法
+type Mask<Source, Types> = {
+  // in 用来遍历可枚举类型
+  [K in keyof Source]: Source[K] extends Types ? K : never
+}
+
+type Example = {
+  name: string
+  age: number
+}
+interface IExample {
+  name: string
+  age: number
+}
+
+type newType = Mask<Example, string>
+type newI = Mask<IExample, string>
+
+// 两者相同都可以生成 { name: "name"; age: never; }
+// 生成这个 type 就可以利用索引访问 type 属性
+```
+
+##### 索引访问 type 属性
+
+```ts
+// type 才能写表达式, interface 只能写接口形状
+type User = {
+  name: 'Zep'
+  height: 178
+  money: never
+  // ✨ 但是如果 value 是 never, 就不会返回
+}['name' | 'height' | 'money']
+// 等价于(字符串字面量类型)
+type User = 'Zep' | 178
+
+const func = (user: User) => {}
+func('Zep')
+
+// ✨ interface 采用上述语法会报错
+interface IUser {
+  name: 'Zep'
+  height: 178
+  money: never
+  // ✨ 这种方式会报错, 使用逗号分割(['name', 'height', 'money'])会通过, 但是不起任何作用, 接口还是需要传递相应类型
+  // 但是 nerve 类型会不通过, ✨ 这个待研究需要传什么类型
+}['name' | 'height' | 'money']
+
+// 所以我们可以写一个泛型 type
+type Mask<Source, Types> = {
+  [K in keyof Source]: Source[K] extends Types ? K : never
+}[keyof Source]
+
+// 例子接口
+interface IExample {
+  name: string
+  height: number
+  girlfriends: string[]
+  job: string
+}
+
+// 得到联合类型 "name" | "job", 都是字面量类型
+type NewType = Mask<IExample, string>
+
+// 得到字面量我们可以在一个类型对象中, 选择指定的类型, 组成新类型
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P]
+}
+type FilterType<Source, Types> = Pick<Source, Mask<Source, Types>>
+type NewTypes = Filter<IExample, string[]> // { girlfriends: string[]; }
+```
+
 ##### React 接口类型(declare 可以全局声明)
 
 ```ts
